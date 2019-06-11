@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>thinkingbubble</title>
+  
+    <style>
+    *{
+      font-family: sans-serif;
+    }
+    #wrap{
+    position: relative;
+    display: inline-block;
+    }
+    input{
+      opacity: 0;
+      transition:opacity 1s;
+      border:none;
+      padding: 10vh;
+      display: inline-block;
+      background-blend-mode: lighten;
+      font-size: 2vh;
+      overflow: visible;
+    }
+    .think1{
+    background: url(outline.png) 0% 30% no-repeat, url(outline.png) 20% 10% no-repeat, url(outline.png) 80% 10% no-repeat, url(outline.png) 100% 50% no-repeat, url(outline.png) 20% bottom no-repeat, url(outline.png) 70% 50% no-repeat;
+    background-size: auto 40%, auto 50%, auto 40%, auto 50%, auto 60%, auto 70%;
+    }
+    .think2{
+    background: url(outline.png) 0% 30% no-repeat, url(outline.png) 20% 10% no-repeat, url(outline.png) 50% top no-repeat, url(outline.png) 80% 10% no-repeat, url(outline.png) 100% 50% no-repeat, url(outline.png) 20% 90% no-repeat, url(outline.png) 50% bottom no-repeat, url(outline.png) 70% 50% no-repeat;
+    background-size: auto 40%,auto 50%, auto 60%, auto 40%, auto 50%, auto 60%, auto 50%, auto 70%;
+      }
+    .dot{
+    z-index: 10000;
+    background-color: white;
+    border-radius: 50%;
+    border: 0.2vh solid skyblue;
+    opacity: 0;
+    display: inline-block;
+    padding: 1vh;
+    position: absolute
+    }
+    #dot_1{
+    margin-left: 50%;
+    margin-top: 5%;
+    }
+    #dot_2{
+    margin-left: 50%;
+    margin-top: 0%;
+    }
+    #dot_3{
+    margin-left: 65%;
+    margin-top: -10%;
+    }
+    #click{
+    top: 25vh;
+    left: 20%;
+    width: 10vh;
+    height: 10vh;
+    background-color: lightgreen;
+    position: absolute;
+    cursor: pointer;
+    }
+    .opacity{
+      opacity: 1
+    }
+    input:focus {outline:0;}
+    </style>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      var input = document.querySelector('input'); // get the input element
+      input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+      resizeInput.call(input); // immediately call the function
+      $('#click').click(function() {
+           $('input').addClass('opacity');
+          $('#dot_3').addClass('opacity');
+          $('#dot_2').addClass('opacity');
+           $('input').focus();
+      });
+      function resizeInput() {
+        this.style.width = this.value.length*0.8 + "ch";
+        if(this.value.length>10){
+          $('input').addClass('think2')
+          $('#dot_1').addClass('opacity');
+    $('#dot_2').css({'marginLeft': '60%'})
+        }else{
+          $('input').removeClass('think2')
+          $('#dot_1').removeClass('opacity');
+    $('#dot_2').css({'marginLeft': '50%'})
+        }
+        if(this.value.length>25){
+          alert('stop writingT_T')
+        }
+        console.log(this.value.length)
+      }
+    })
+    </script>
+  </head>
+  <body>
+    <div id="wrap">
+    <input type="text" class="think1" name="FirstName" value="Ha!">
+    <div class="dot" id="dot_1"></div>
+    <div class="dot" id="dot_2"></div>
+    <div class="dot" id="dot_3"></div>
+    <div id="click">
+      clickme
+    </div>
+    </div>
+  </body>
+</html>
